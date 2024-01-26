@@ -1,0 +1,123 @@
+body {
+    font-family: 'Lora' !important;
+    background-color: #eee;
+}
+
+#arf-form-container {
+    position: relative;
+    padding: 30px 30px 20px 30px;
+    z-index: 1;
+    border-radius: 0 30px 0 30px;
+    background-color: white;
+    transition: all 1s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+#app-Nav {
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22) !important;
+}
+
+#arf-form-container:hover {
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22) !important;
+    background-color: none;
+}
+
+#arf-form-header {
+    display: flex;
+    align-items: center;
+}
+
+#arf-header-table input {
+    width: 100%;
+    max-width: 100%;
+}
+
+.arf-heading-lg,
+.arf-heading-md {
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.arf-heading-md {
+    text-transform: capitalize;
+}
+
+.arf-form-control {
+    background: transparent;
+    border: none;
+    height: 22px;
+    padding: 0
+}
+
+.arf-form-select {
+    height: 22px;
+    line-height: 2;
+    margin: 0;
+}
+
+#arf-section-2 {
+    margin-top: 40px
+}
+
+#arf-section-2-heading {
+    text-align: center;
+    background: #eee;
+}
+
+.arf-form-control-section-2 {
+    height: 26px
+}
+
+#arf-section-3 {
+    margin-top: 40px
+}
+
+#arf-section-5,
+#arf-section-4 {
+    border: 1px solid #777;
+    padding: 8px;
+    margin-top: 30px
+}
+
+.search-heading-md {
+    font-weight: 900;
+    text-decoration: underline;
+}
+
+/* Overrides */
+table.table-bordered {
+    border-color: #777;
+}
+
+input:disabled {
+    background-color: transparent !important;
+    cursor: not-allowed;
+}
+
+.btn-transparent {
+    border: none;
+    cursor: pointer;
+    pointer-events: none;
+    margin: 0;
+    padding: 0;
+}
+
+.form-check-input {
+    cursor: pointer;
+}
+
+.asset-code-input {
+    max-width: 140px;
+    text-align: center;
+    border: none
+}
+
+.date-issued, .brand-input {
+    max-width: 130px;
+}
+
+.remove-asset {
+    text-align: center;
+    cursor: pointer;
+    color: red
+}
