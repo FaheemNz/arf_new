@@ -171,6 +171,7 @@ class ArfFormService
             
             if($laptop){
                 $laptop->status = 'With User';
+                $laptop->updated_at = now();
                 $laptop->save();
                 
                 $logString = 'Laptop Asset Code: ' . $laptop->asset_code;
@@ -179,6 +180,7 @@ class ArfFormService
             }
             if($desktop){
                 $desktop->status = 'With User';
+                $laptop->updated_at = now();
                 $desktop->save();
                 
                 $logString .= 'Desktop Asset Code: ' . $desktop->asset_code;
@@ -187,6 +189,7 @@ class ArfFormService
             }
             if($monitor){
                 $monitor->status = 'With User';
+                $laptop->updated_at = now();
                 $monitor->save();
                 
                 $logString .= 'Monitor Asset Code: ' . $monitor->asset_code;
@@ -195,6 +198,7 @@ class ArfFormService
             }
             if($tablet){
                 $tablet->status = 'With User';
+                $laptop->updated_at = now();
                 $tablet->save();
                 
                 $logString .= 'Tablet Asset Code: ' . $tablet->asset_code;
@@ -203,6 +207,7 @@ class ArfFormService
             }
             if($sim){
                 $sim->status = 'With User';
+                $laptop->updated_at = now();
                 $sim->save();
                 
                 $logString .= 'Sim Asset Code: ' . $sim->asset_code;
@@ -211,6 +216,7 @@ class ArfFormService
             }
             if($mobile){
                 $mobile->status = 'With User';
+                $laptop->updated_at = now();
                 $mobile->save();
                 
                 $logString .= 'Mobile Asset Code: ' . $mobile->asset_code;

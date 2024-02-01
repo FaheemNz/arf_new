@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container-fluid">
-    <form action="{{ route('arfform.destroy', $arf->emp_id) }}" method="POST">
+    <form action="{{ route('arfform.destroy', $arf->emp_id) }}" method="POST" id="offboarding_form">
         @csrf
         
         <input type="hidden" value="{{ $arf->id }}" name="arf_id" />
@@ -160,7 +160,7 @@
                                             <input required class="form-control arf-form-control arf-form-control-section-2 arf-toggle-input" type="text" name="arf_laptop_remarks" value="{{ $laptop->remarks }}" readonly />
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-sm btn-info" onclick="freeAsset({{$laptop->id}}, 'laptops', {{$laptop->asset_code}})">Free</button>
+                                            <button type="button" class="btn btn-sm btn-info" onclick="freeAsset({{$laptop->id}}, 'laptops', '{{$laptop->asset_code}}')">Free</button>
                                         </td>
                                         <input name="has_laptop" id="has_laptop" value="Y" class="form-check-input" type="hidden" />
                                     </tr>
@@ -192,7 +192,7 @@
                                             <input required class="form-control arf-form-control arf-form-control-section-2 arf-toggle-input" type="text" name="arf_tablet_remarks" value="{{ $tablet->remarks }}" readonly  />
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-sm btn-info" data-table="" onclick="freeAsset({{$tablet->id}}, 'tablets', {{$tablet->asset_code}})">Free</button>
+                                            <button type="button" class="btn btn-sm btn-info" data-table="" onclick="freeAsset({{$tablet->id}}, 'tablets', '{{$tablet->asset_code}}')">Free</button>
                                         </td>
                                         <input name="has_tablet" id="has_tablet" value="Y" class="form-check-input" type="hidden" />
                                     </tr>
@@ -224,7 +224,7 @@
                                             <input required class="form-control arf-form-control arf-form-control-section-2 arf-toggle-input" type="text" name="arf_sim_remarks" value="{{ $sim->remarks }}" readonly />
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-sm btn-info" data-table="" onclick="freeAsset({{$sim->id}}, 'sims', {{$sim->asset_code}})">Free</button>
+                                            <button type="button" class="btn btn-sm btn-info" data-table="" onclick="freeAsset({{$sim->id}}, 'sims', '{{$sim->asset_code}}')">Free</button>
                                         </td>
                                         <input name="has_sim" id="has_sim" value="Y" class="form-check-input" type="hidden" />
                                     </tr>
@@ -256,7 +256,7 @@
                                             <input required class="form-control arf-form-control arf-form-control-section-2 arf-toggle-input" type="text" name="arf_desktop_remarks" value="{{ $desktop->remarks }}" readonly />
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-sm btn-info" data-table="" onclick="freeAsset({{$desktop->id}}, 'desktops', {{$desktop->asset_code}})">Free</button>
+                                            <button type="button" class="btn btn-sm btn-info" data-table="" onclick="freeAsset({{$desktop->id}}, 'desktops', '{{$desktop->asset_code}}')">Free</button>
                                         </td>
                                         <input name="has_desktop" id="has_desktop" value="Y" class="form-check-input" type="hidden" />
                                     </tr>
@@ -288,7 +288,7 @@
                                             <input required class="form-control arf-form-control arf-form-control-section-2 arf-toggle-input" type="text" name="arf_monitor_remarks" value="{{ $monitor->remarks }}" readonly />
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-sm btn-info" data-table="" onclick="freeAsset({{$monitor->id}}, 'monitors', {{$monitor->asset_code}})">Free</button>
+                                            <button type="button" class="btn btn-sm btn-info" data-table="" onclick="freeAsset({{$monitor->id}}, 'monitors', '{{$monitor->asset_code}}')">Free</button>
                                         </td>
                                         <input name="has_monitor" id="has_monitor" value="Y" class="form-check-input" type="hidden" />
                                     </tr>
@@ -320,7 +320,7 @@
                                             <input required class="form-control arf-form-control arf-form-control-section-2 arf-toggle-input" type="text" name="arf_mobile_remarks" value="{{ $mobile->remarks }}" readonly />
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-sm btn-info" data-table="" onclick="freeAsset({{$mobile->id}}, 'mobiles', {{$mobile->asset_code}})">Free</button>
+                                            <button type="button" class="btn btn-sm btn-info" data-table="" onclick="freeAsset({{$mobile->id}}, 'mobiles', '{{$mobile->asset_code}}')">Free</button>
                                         </td>
                                         <input name="has_mobile" id="has_mobile" value="Y" class="form-check-input" type="hidden" />
                                     </tr>
@@ -354,7 +354,7 @@
                     <a href="/" class="btn btn-outline-secondary">
                         Cancel
                     </a>
-                    <button type="submit" class="btn btn-primary">
+                    <button type="button" class="btn btn-primary" onclick="initiateOffboarding({{$arf->emp_id}})">
                         Initiate Offboarding
                     </button>
                 </div>
@@ -403,6 +403,16 @@
                     alert("Freeing Asset was not successful. Some Error Occured");
                 },
             });
+    }
+
+    function initiateOffboarding(emp_id){
+        let response = confirm("Are you sure to offboard the employee: " + emp_id );
+
+        if( ! response ){
+            return;
+        }
+
+        $('#offboarding_form').submit();
     }
 </script>
 @endsection
