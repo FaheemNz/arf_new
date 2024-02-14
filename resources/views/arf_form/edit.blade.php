@@ -354,7 +354,7 @@
                     <a href="/" class="btn btn-outline-secondary">
                         Cancel
                     </a>
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn bg-purple text-white">
                         Update ARF
                     </button>
                 </div>

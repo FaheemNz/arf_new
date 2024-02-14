@@ -120,3 +120,11 @@ input:disabled {
     cursor: pointer;
     color: red
 }
+
+.bg-purple {
+    background-color: #6200EE
+}
+
+.bg-purple-light {
+    background-color: #BB86FC;
+}

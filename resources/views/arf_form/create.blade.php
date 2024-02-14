@@ -119,7 +119,7 @@
                                         <tr>
                                             <td class="col-3 arf-heading-md">Email ID</td>
                                             <td>
-                                                <input class="form-control arf-form-control arf-form-control-section-2" type="text" id="arf-email" name="arf_email" required />
+                                                <input class="form-control arf-form-control arf-form-control-section-2" type="email" id="arf-email" name="arf_email" required />
                                             </td>
                                         </tr>
                                     </tbody>
@@ -353,7 +353,7 @@
                     <a href="/" class="btn btn-outline-secondary">
                         Cancel
                     </a>
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn bg-purple text-white">
                         Submit ARF
                     </button>
                 </div>

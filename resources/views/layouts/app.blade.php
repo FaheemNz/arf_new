@@ -25,7 +25,7 @@
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-dark bg-primary" id="app-Nav">
+        <nav class="navbar navbar-expand-md navbar-dark bg-purple" id="app-Nav">
             <div class="container">
                 <button type="button" class="bg-transparent" data-bs-toggle="offcanvas" href="#sideDrawer" role="button" style="border: none; margin-right: 16px">
                     <span class="navbar-toggler-icon"></span>
@@ -80,44 +80,36 @@
             </div>
         </nav>
 
-        <div class="offcanvas offcanvas-start" tabindex="-1" id="sideDrawer" aria-labelledby="sideDrawer">
+        <div class="offcanvas offcanvas-bottom" style="border-radius: 0 24px 24px 0" tabindex="-1" id="sideDrawer" aria-labelledby="sideDrawer">
             <div class="offcanvas-header">
                 <h5 class="offcanvas-title" id="offcanvasExampleLabel">AZIZI ARF</h5>
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
                 <div class="list-group" id="sideDrawerList">
-                    <a href="/" class="list-group-item list-group-item-action drawer-li active" aria-current="true" id="sideDrawerListItem1">
+                    <a href="/" class="list-group-item list-group-item-action drawer-li" aria-current="true" id="sideDrawerListItem1">
                         <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1">Home</h5>
                         <small><i class="fa fa-home"></i></small>
                         </div>
-                        <p class="mb-1">Navigate to Home Screen</p>
-                        <p>Go to Home Page</p>
                     </a>
                     <a href="/admin" class="list-group-item drawer-li list-group-item-action" id="sideDrawerListItem2">
                         <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1">Admin Panel</h5>
                         <small> <i class="fa fa-cube"></i>  </small>
                         </div>
-                        <p class="mb-1">Open Admin Panel Controls</p>
-                        <p>Open Controls of Admin Panel</p>
                     </a>
                     <a href="/upload-assets" class="list-group-item drawer-li list-group-item-action" id="sideDrawerListItem3">
                         <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1">Upload Assets</h5>
                         <small><i class="fa fa-upload"></i></small>
                         </div>
-                        <p class="mb-1">Open Upload Asset</p>
-                        <p>Upoad Assets to the Asset System</p>
                     </a>
                     <a href="/search" class="list-group-item drawer-li list-group-item-action" id="sideDrawerListItem4">
                         <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1">Search</h5>
                         <small><i class="fa fa-search"></i></small>
                         </div>
-                        <p class="mb-1">Search Assets in System</p>
-                        <p>Open Search App</p>
                     </a>
                 </div>
             </div>

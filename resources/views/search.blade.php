@@ -52,8 +52,8 @@
                 </div>
 
                 <div class="text-end mt-3">
-                    <button type="button" onclick="window.location.href = '/search'" class="btn btn-outline-secondary">Refresh</button>
-                    <button type="submit" class="btn btn-primary">Search</button>
+                    <button type="button" onclick="window.location.href = '/search'" class="btn">Refresh</button>
+                    <button type="submit" class="btn bg-purple text-white">Search</button>
                 </div>
             </form>
 

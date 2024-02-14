@@ -66,10 +66,23 @@
     }
 
     .box {
-        border-radius: 5px;
+        border-radius: 16px 0 16px 0;
         box-shadow: 0px 30px 40px -20px var(--grayishBlue);
         padding: 30px;
         margin: 20px;
+        transition: all .1s ease-out;
+    }
+
+    .box:hover {
+        box-shadow: none;
+        background: #BB86FC;
+        cursor: pointer;
+        color: white !important;
+        transform: scale(1.01)
+    }
+
+    .box:hover h2, .box:hover p {
+        color: white;
     }
 
     img {
@@ -148,7 +161,7 @@
     </div>
     <div class="row1-container text-center">
         <div class="box red box-down">
-            <h2>Offboarding / Update</h2>
+            <h2>Offboarding | Update</h2>
             <div><input type="text" id="emp_id" placeholder="Enter Emp ID" class="form-control"></div>
             <div class="mt-2">
                 <select onchange="preSelectOfficeLocation(this.value)" name="action" id="action" class="form-select form-select-sm" aria-label="Default" required>
@@ -157,27 +170,31 @@
                     <option value="Offboarding">Offboarding</option>
                 </select>
             </div>
-            <button type="button" class="btn btn-primary btn-sm mt-3" onclick="openUpdateOrOffboardingForm()">Go</a>
+            <button type="button" class="btn bg-purple text-white btn-sm mt-3" onclick="openUpdateOrOffboardingForm()">Start Process</a>
         </div>
 
         <div class="box cyan">
             <h2>ARF Form</h2>
             <p>Create a new ARF Form</p>
-            <a href="/arf-new" class="btn btn-primary">New Form</a>
+            <a href="/arf-new" class="btn bg-purple text-white">New Form</a>
         </div>
 
         <div class="box red box-down">
             <h2>Admin Panel</h2>
-            <p><a href="/admin" target="_blank">Admin Panel</a></p>
-            <img src="https://assets.codepen.io/2301174/icon-karma.svg" alt="">
+            <p>
+                <a href="/admin" class="btn bg-purple text-white btn-sm mt-3">Admin Panel</a>
+            </p>
+            <img src="https://assets.codepen.io/2301174/icon-karma.svg" />
         </div>
     </div>
     <div class="row2-container">
         <div class="box orange text-center">
-            <h2>Upload</h2>
-            <p><a href="/upload-assets" target="_blank">Upload Assets </a></p>
-            <div class="d-flex align-items-center justify-content-center">
-                <button type="button" class="btn btn-success btn-sm mt-3" id="btnAsset" onclick="refreshAssets()">Refresh Assets</button>
+            <h2>Upload | Refresh</h2>
+            <div>
+                <div class="btn-group">
+                    <button type="button" class="btn bg-purple text-white btn-sm" disabled id="btnAsset" onclick="refreshAssets()">Refresh</button>
+                    <a class="btn bg-purple text-white btn-sm" href="/upload-assets">Upload</a>
+                </div>
                 <div class="spinner-border text-primary mx-3 d-none" role="status" id="assetLoader">
                     <span class="visually-hidden">Loading...</span>
                 </div>

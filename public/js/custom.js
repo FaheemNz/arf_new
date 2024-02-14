@@ -84,6 +84,7 @@ $(function () {
     });
 
     $('#arf_emp_id').on("change", function (e) {
+        return;
         let empId = $(this).val();
 
         if (/[0-9]{3,7}/.test(empId)) {

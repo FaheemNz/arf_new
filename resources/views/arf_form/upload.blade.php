@@ -69,7 +69,7 @@
                 </div>
                 <div class="col-12 d-flex justify-content-end">
                     <button type="button" class="btn btn-outline-secondary mx-1" onclick="window.location.href = '/'">Cancel</button>
-                    <button type="submit" class="btn btn-success">Create</button>
+                    <button type="submit" class="btn bg-purple text-white">Create</button>
                 </div>
             </form>
         </div>
