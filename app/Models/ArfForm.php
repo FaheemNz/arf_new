@@ -86,6 +86,11 @@ class ArfForm extends Model
         return ['HP', 'Dell', 'Apple'];
     }
 
+    public static function getPrinterBrands()
+    {
+        return ['HP', 'Dell'];
+    }
+
     // Accessors
     public function getDetailsAttribute()
     {

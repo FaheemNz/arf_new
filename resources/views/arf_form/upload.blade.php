@@ -11,7 +11,7 @@
             </ol>
         </nav>
 
-        <div class="col-md-6" style="box-shadow: 0 5px 10px rgba(0, 0, 0, .2); border-radius: 20px 0 20px 0; padding: 24px; background: #fff">
+        <div class="col-md-10 col-sm-12 col-lg-6" style="box-shadow: 0 5px 10px rgba(0, 0, 0, .2); border-radius: 20px 0 20px 0; padding: 24px; background: #fff">
             <h4>Upload Assets to the System..</h4>
             <hr />
 
@@ -51,6 +51,7 @@
                         <option value="Mobile">Mobile</option>
                         <option value="Tablet">Tablet</option>
                         <option value="Sim">Sim</option>
+                        <option value="Printer">Printer</option>
                     </select>
                 </div>
                 <div class="col-md-12">

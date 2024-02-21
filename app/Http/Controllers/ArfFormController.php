@@ -52,7 +52,7 @@ class ArfFormController extends Controller
                 return redirect()->back()->withErrors(['An ARF Form Already Exists for this Employee. ' . $link]);
             }
 
-            Log::info('### ARF Form Created ###', [
+            Log::info('### ARF Form Created - Started ###', [
                 'By'       => auth()->user()->name,
                 'Time'     => now(),
                 'Request'  => json_encode($arfFormRequest->validated())
@@ -73,9 +73,12 @@ class ArfFormController extends Controller
             return back()->with('success', 'ARF Saved Successfully');
 
             Log::info('### ARF Form Created - Success ###', [
-                'Token' => $token,
-                'Name'  => $arfData['arf_name'],
-                'Email' => $arfData['arf_email']
+                'By'        =>      auth()->user()->name,
+                'Time'      =>      now(),
+                'Request'   =>      json_encode($arfFormRequest->validated()),
+                'Token'     =>      $token,
+                'Name'      =>      $arfData['arf_name'],
+                'Email'     =>      $arfData['arf_email']
             ]);
             
         } catch (\Exception $exception) {
@@ -87,6 +90,12 @@ class ArfFormController extends Controller
     
     public function edit(Request $request, int $id)
     {
+        if( ! auth()->user()->can('edit', $arfForm) ){
+            return redirect()
+                    ->back()
+                    ->withErrors(['You are not authorized to create ARF Form']);
+        }
+
         $arf = ArfForm::where('emp_id', $id)->first();;
 
         if(!$arf){
@@ -109,7 +118,8 @@ class ArfFormController extends Controller
             'desktopBrands'     =>      ArfForm::getDesktopBrands(),
             'monitorBrands'     =>      ArfForm::getMonitorBrands(),
             'tabletBrands'      =>      ArfForm::getTabletBrands(),
-            'simNetworks'       =>      ArfForm::getSimNetworks()
+            'simNetworks'       =>      ArfForm::getSimNetworks(),
+            'printerBrands'     =>      ArfForm::getPrinterBrands()
         ]);
     }
 

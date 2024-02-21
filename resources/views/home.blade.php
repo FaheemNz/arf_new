@@ -192,7 +192,7 @@
             <h2>Upload | Refresh</h2>
             <div>
                 <div class="btn-group">
-                    <button type="button" class="btn bg-purple text-white btn-sm" disabled id="btnAsset" onclick="refreshAssets()">Refresh</button>
+                    <button type="button" class="btn bg-secondary text-white btn-sm" disabled id="btnAsset" onclick="refreshAssets()">Refresh</button>
                     <a class="btn bg-purple text-white btn-sm" href="/upload-assets">Upload</a>
                 </div>
                 <div class="spinner-border text-primary mx-3 d-none" role="status" id="assetLoader">

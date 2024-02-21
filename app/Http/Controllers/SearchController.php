@@ -80,7 +80,7 @@ class SearchController extends Controller
             ]);
         }
 
-        if(!in_array($type, ['Laptop', 'Tablet', 'Mobile', 'Desktop', 'Monitor', 'Sim'])){
+        if(!in_array($type, ['Laptop', 'Tablet', 'Mobile', 'Desktop', 'Monitor', 'Sim', 'Printer'])){
             return response()->json([
                 'success' => false,
                 'message' => 'Please provide a valid Asset Type'

@@ -27,9 +27,11 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-dark bg-purple" id="app-Nav">
             <div class="container">
+                @auth    
                 <button type="button" class="bg-transparent" data-bs-toggle="offcanvas" href="#sideDrawer" role="button" style="border: none; margin-right: 16px">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                @endauth
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>

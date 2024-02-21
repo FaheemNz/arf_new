@@ -83,6 +83,20 @@ $(function () {
         }
     });
 
+    $("#has_printer").click(function () {
+        if ($("#has_printer").is(":checked")) {
+            $("#printer-row").find(".arf-toggle-input").removeAttr("disabled");
+            $("#btn_arf_printer_search")
+                .prop("disabled", false)
+                .css("pointer-events", "all");
+        } else {
+            $("#printer-row").find(".arf-toggle-input").attr("disabled", true);
+            $("#btn_arf_printer_search")
+                .prop("disabled", true)
+                .css("pointer-events", "none");
+        }
+    });
+
     $('#arf_emp_id').on("change", function (e) {
         return;
         let empId = $(this).val();

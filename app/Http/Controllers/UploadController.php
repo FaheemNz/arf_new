@@ -11,7 +11,7 @@ class UploadController extends Controller
 {
     public function index(Request $request)
     {
-        if( ! auth()->user()->hasRole('admin') ){
+        if( ! auth()->user()->hasRole('admin') && ! auth()->user()->hasRole('Arf Admin') ){
             return redirect('/');
         }
 

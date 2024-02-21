@@ -327,6 +327,37 @@
                                         </div>
                                     </td>
                                 </tr>
+                                <tr id="printer-row">
+                                    <td>7</td>
+                                    <td class="arf-heading-md">printer</td>
+                                    <td class="asset-code-input">
+                                        <div class="d-flex align-items-center">
+                                            <input readonly required name="arf_printer_asset_code" id="arf_printer_asset_code" disabled class="form-control arf-form-control arf-form-control-section-2 arf-toggle-input" type="text" />
+                                            <button type="button" disabled class="btn-transparent" id="btn_arf_printer_search">
+                                                <i disabled class="fa fa-pencil-square-o searchModalTrigger" data-field-asset-code="arf_printer_asset_code" data-table="printers" data-field-brand="arf_printer_brand"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <select required name="arf_printer_brand" id="arf_printer_brand" class="brand-input form-select form-select-sm arf-form-control-section-2 arf-toggle-input" disabled>
+                                            <option value="">Select</option>
+                                            @foreach($monitorBrands as $mb)
+                                                <option value="{{ $mb }}">{{ $mb }}</option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input required name="arf_printer_date_issued" disabled class="fdate-issued orm-control arf-form-control arf-form-control-section-2 arf-toggle-input" type="date" value="<?php echo date('Y-m-d') ?>" />
+                                    </td>
+                                    <td>
+                                        <input required name="arf_printer_remarks"  disabled class="form-control arf-form-control arf-form-control-section-2 arf-toggle-input" type="text" />
+                                    </td>
+                                    <td>
+                                        <div class="form-check form-switch">
+                                            <input name="has_printer" id="has_printer" value="Y" class="form-check-input" type="checkbox" />
+                                        </div>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
