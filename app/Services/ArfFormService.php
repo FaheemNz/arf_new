@@ -91,47 +91,36 @@ class ArfFormService
         }
     }
 
-    public static function unRegisterAssets($arfData, $arf)
+    public static function unRegisterAssets($assets, $arf)
     {
-        $assets = [];
+        if( empty($assets) || count($assets) === 0 ){
+            return;
+        }
 
-        if (isset($arfData['has_laptop']) && $arfData['has_laptop'] == 'Y') {
-            $assets[] = ['field_name' => 'laptop', 'model_name' => 'Laptop'];
-        }
-        if (isset($arfData['has_monitor']) && $arfData['has_monitor'] == 'Y') {
-            $assets[] = ['field_name' => 'monitor', 'model_name' => 'Monitor'];
-        }
-        if (isset($arfData['has_tablet']) && $arfData['has_tablet'] == 'Y') {
-            $assets[] = ['field_name' => 'tablet', 'model_name' => 'Tablet'];
-        }
-        if (isset($arfData['has_desktop']) && $arfData['has_desktop'] == 'Y') {
-            $assets[] = ['field_name' => 'desktop', 'model_name' => 'Desktop'];
-        }
-        if (isset($arfData['has_sim']) && $arfData['has_sim'] == 'Y') {
-            $assets[] = ['field_name' => 'sim', 'model_name' => 'Sim'];
-        }
-        if (isset($arfData['has_mobile']) && $arfData['has_mobile'] == 'Y') {
-            $assets[] = ['field_name' => 'mobile', 'model_name' => 'Mobile'];
-        }
+        $modelMapping = [
+            'laptops'       =>      \App\Models\Laptop::class,
+            'sims'          =>      \App\Models\Sim::class,
+            'tablets'       =>      \App\Models\Tablet::class,
+            'monitors'      =>      \App\Models\Monitor::class,
+            'printers'      =>      \App\Models\Printer::class,
+            'mobiles'       =>      \App\Models\Mobile::class,
+            'laptops'       =>      \App\Models\Laptop::class,
+        ];
 
         if (count($assets) > 0) {
             foreach ($assets as $asset) {
-                if ($asset['model_name'] == 'Laptop') {
-                    $a = Laptop::where('id', $arfData['arf_offboarding_laptop_id'])->where('asset_code', $arfData["arf_{$asset['field_name']}_asset_code"])->first();
-                } elseif ($asset['model_name'] == 'Monitor') {
-                    $a = Monitor::where('id', $arfData['arf_offboarding_monitor_id'])->where('asset_code', $arfData["arf_{$asset['field_name']}_asset_code"])->first();
-                } elseif ($asset['model_name'] == 'Sim') {
-                    $a = Sim::where('id', $arfData['arf_offboarding_sim_id'])->where('asset_code', $arfData["arf_{$asset['field_name']}_asset_code"])->first();
-                } elseif ($asset['model_name'] == 'Desktop') {
-                    $a = Desktop::where('id', $arfData['arf_offboarding_desktop_id'])->where('asset_code', $arfData["arf_{$asset['field_name']}_asset_code"])->first();
-                } elseif ($asset['model_name'] == 'Tablet') {
-                    $a = Tablet::where('id', $arfData['arf_offboarding_tablet_id'])->where('asset_code', $arfData["arf_{$asset['field_name']}_asset_code"])->first();
-                } elseif ($asset['model_name'] == 'Mobile') {
-                    $a = Mobile::where('id', $arfData['arf_offboarding_mobile_id'])->where('asset_code', $arfData["arf_{$asset['field_name']}_asset_code"])->first();
+                $modelName = $modelMapping[$asset['asset_table']] ?? null;
+
+                if( ! $modelName ){
+                    continue;
                 }
+
+                $a = $modelName::where('id', $asset['asset_id'])
+                               ->where('asset_code', $asset['asset_code'])
+                               ->first();
                 
                 if($a){
-                    $a->history = $a->history . ", Previous User: [Name: {$arf->name}, Emp_ID: {$arf->emp_id}, Email: {$arf->email}, Status: {$a->status}, Date: {$a->updated_at}]";
+                    $a->history = $a->history . ", Previous User: [Name: {$arf->name}, Emp_ID: {$arf->emp_id}, Email: {$arf->email}, Date: {$a->updated_at}]";
                     $a->remarks = null;
                     $a->date_issued = null;
                     $a->arf_form_id = null;
@@ -141,7 +130,7 @@ class ArfFormService
                     $a->save();
 
                     Log::info('### Offboarding - Unregistering Asset Started ###', [
-                        'Asset_Type' => $asset['model_name'],
+                        'Asset_Type' => $asset['asset_table'],
                         'Previous_User' => $arf->name,
                         'Date' => $arf->updated_at,
                         'Asset_Code' => $a->asset_code
@@ -149,8 +138,6 @@ class ArfFormService
                 }
             }
         }
-
-        LogActivity::add('Unregister_Asset', json_encode(['Arf_Id' => $arf->id, 'request' => $arfData]), $arf->emp_id, 'Offboarding User Emp ID: ' . $arf->emp_id);
     }
     
     public static function updateAssetStatus(int $arf_id, string $user)

@@ -52,24 +52,29 @@ class WelcomeController extends Controller
     //     }
     // }
 
+    public function newStuff()
+    {
+       
+    }
+
     public function index()
     {
-        return;
-        // \DB::table('arf_forms')->insert([
-        //     array(
-        //             "name" => "Rajeev Kumar",
-        //             "email" => "Krishna.Rajeevkumar@gardinia.ae",
-        //             "emp_id" => "8240",
-        //             "department_id" => 11,
-        //             "office_location_id" => 7,
-        //             'status' => 'Acknowledged'
-        //         ),
-        // ]);
+        // $arf = ArfForm::where('id', 3768)->first();
 
-        // return;
-
+        // $arf1 = $arf->replicate();
+        // //$arf2 = $arf->replicate();
         
+        // $arf1->save();
+        //$arf2->save();
+
+        return;
+        //$this->newStuff();
+        //return;
+        
+        return;
+
         $this->updateSim();
+
         return;
 
         for( $i=0; $i<count($arf_forms); $i++ ){
@@ -93,10 +98,6 @@ class WelcomeController extends Controller
 
     public function updateSim()
     {
-        
-
-        
-
         for($i=0; $i<count($sims); $i++)
         {
             $arf = ArfForm::where('name', '=', $sims[$i]['name'])->first();

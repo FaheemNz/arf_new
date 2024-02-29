@@ -12,7 +12,7 @@ class ArfForm extends Model
     protected $guarded = [];
     public $additional_attributes = ['details'];
 
-    protected $with = ['laptops', 'sims', 'tablets', 'monitors'];
+    protected $with = ['laptops', 'sims', 'tablets', 'monitors', 'desktops', 'mobiles', 'printers'];
 
     public $allow_export_all = true;
     public $export_handler = \App\Exports\ArfFormExport::class;
@@ -49,6 +49,10 @@ class ArfForm extends Model
     public function mobiles()
     {
         return $this->hasMany(Mobile::class, 'arf_form_id');
+    }
+    public function printers()
+    {
+        return $this->hasMany(Printer::class, 'arf_form_id');
     }
 
     // Methods

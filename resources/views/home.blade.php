@@ -67,23 +67,15 @@
 
     .box {
         border-radius: 16px 0 16px 0;
-        box-shadow: 0px 30px 40px -20px var(--grayishBlue);
+        box-shadow: 0px 5px 20px -10px var(--grayishBlue);
         padding: 30px;
         margin: 20px;
-        transition: all .1s ease-out;
+        transition: all .3s ease-out;
     }
 
     .box:hover {
-        box-shadow: none;
-        background: #BB86FC;
-        cursor: pointer;
-        color: white !important;
-        transform: scale(1.01)
-    }
-
-    .box:hover h2, .box:hover p {
-        color: white;
-    }
+        box-shadow: 0px 30px 40px -20px var(--grayishBlue);
+    } 
 
     img {
         float: right;
@@ -215,9 +207,9 @@
         }
 
         if(action.value == "Asset_Update"){
-            window.open("/arf-edit/" + empId.value, "_blank");
+            window.open("/arf-edit/" + empId.value);
         } else if(action.value == "Offboarding"){
-            window.open("/arf-offboarding/" + empId.value, "_blank");
+            window.open("/arf-offboarding/" + empId.value);
         }
     }
 

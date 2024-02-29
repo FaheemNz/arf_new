@@ -82,7 +82,7 @@
             </div>
         </nav>
 
-        <div class="offcanvas offcanvas-bottom" style="border-radius: 0 24px 24px 0" tabindex="-1" id="sideDrawer" aria-labelledby="sideDrawer">
+        <div class="offcanvas offcanvas-start" style="width: 300px" tabindex="-1" id="sideDrawer" aria-labelledby="sideDrawer">
             <div class="offcanvas-header">
                 <h5 class="offcanvas-title" id="offcanvasExampleLabel">AZIZI ARF</h5>
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -91,31 +91,48 @@
                 <div class="list-group" id="sideDrawerList">
                     <a href="/" class="list-group-item list-group-item-action drawer-li" aria-current="true" id="sideDrawerListItem1">
                         <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">Home</h5>
+                        <h6 class="mb-1">Home</h6>
                         <small><i class="fa fa-home"></i></small>
                         </div>
                     </a>
                     <a href="/admin" class="list-group-item drawer-li list-group-item-action" id="sideDrawerListItem2">
                         <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">Admin Panel</h5>
+                        <h6 class="mb-1">Admin Panel</h6>
                         <small> <i class="fa fa-cube"></i>  </small>
                         </div>
                     </a>
                     <a href="/upload-assets" class="list-group-item drawer-li list-group-item-action" id="sideDrawerListItem3">
                         <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">Upload Assets</h5>
+                        <h6 class="mb-1">Upload Assets</h6>
                         <small><i class="fa fa-upload"></i></small>
                         </div>
                     </a>
                     <a href="/search" class="list-group-item drawer-li list-group-item-action" id="sideDrawerListItem4">
                         <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">Search</h5>
+                        <h6 class="mb-1">Search</h6>
                         <small><i class="fa fa-search"></i></small>
                         </div>
                     </a>
                 </div>
             </div>
         </div>
+
+        <!-- <div class="modal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="appModalTitle"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="appModalMessage"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ok</button>
+                </div>
+                </div>
+            </div>
+        </div> -->
 
         <main class="py-4">
             <div class="spinner-border text-primary position-fixed top-50 start-50 d-none" id="site-loader" style="z-index: 10000" role="status">

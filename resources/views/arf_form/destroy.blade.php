@@ -2,10 +2,10 @@
 
 @section('content')
 <div class="container-fluid">
-    <form action="{{ route('arfform.destroy', $arf->emp_id) }}" method="POST" id="offboarding_form">
+    <form method="POST" id="offboarding_form">
         @csrf
         
-        <input type="hidden" value="{{ $arf->id }}" name="arf_id" />
+        <input type="hidden" id="arf_form_id" value="{{ $arf->id }}" name="arf_id" />
         <div class="row justify-content-center">
             <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-xl-7 col-lg-10">
 
@@ -160,9 +160,10 @@
                                             <input required class="form-control arf-form-control arf-form-control-section-2 arf-toggle-input" type="text" name="arf_laptop_remarks" value="{{ $laptop->remarks }}" readonly />
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-sm btn-outline-success" onclick="freeAsset({{$laptop->id}}, 'laptops', '{{$laptop->asset_code}}')">Free</button>
+                                            <button type="button" class="btn btn-sm btn-danger" onclick="freeAsset({{$laptop->id}}, 'laptops', '{{$laptop->asset_code}}')">Free</button>
                                         </td>
                                         <input name="has_laptop" id="has_laptop" value="Y" class="form-check-input" type="hidden" />
+										<input type="hidden" name="offboarding_asset_codes" data-asset-table="laptops" data-asset-id="{{ $laptop->id }}" data-asset-code="{{ $laptop->asset_code }}" />
                                     </tr>
                                     <?php $lI++; ?>
                                     @endforeach
@@ -192,9 +193,10 @@
                                             <input required class="form-control arf-form-control arf-form-control-section-2 arf-toggle-input" type="text" name="arf_tablet_remarks" value="{{ $tablet->remarks }}" readonly  />
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-sm btn-outline-success" data-table="" onclick="freeAsset({{$tablet->id}}, 'tablets', '{{$tablet->asset_code}}')">Free</button>
+                                            <button type="button" class="btn btn-sm btn-danger" data-table="" onclick="freeAsset({{$tablet->id}}, 'tablets', '{{$tablet->asset_code}}')">Free</button>
                                         </td>
                                         <input name="has_tablet" id="has_tablet" value="Y" class="form-check-input" type="hidden" />
+										<input type="hidden" name="offboarding_asset_codes" data-asset-table="tablets" data-asset-id="{{ $tablet->id }}" data-asset-code="{{ $tablet->asset_code }}" />
                                     </tr>
                                     <?php $tI++; ?>
                                     @endforeach
@@ -203,7 +205,7 @@
                                 @if( count($arf->sims) > 0 )
                                     <?php $sI = 1; ?>
                                     @foreach( $arf->sims as $sim )
-                                    <tr id="tablet-row-{{$sI}}">
+                                    <tr id="sim-row-{{$sI}}">
                                         <td>3.{{$sI}}</td>
                                         <td class="arf-heading-md">sim</td>
                                         <td class="asset-code-input">
@@ -224,9 +226,10 @@
                                             <input required class="form-control arf-form-control arf-form-control-section-2 arf-toggle-input" type="text" name="arf_sim_remarks" value="{{ $sim->remarks }}" readonly />
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-sm btn-outline-success" data-table="" onclick="freeAsset({{$sim->id}}, 'sims', '{{$sim->asset_code}}')">Free</button>
+                                            <button type="button" class="btn btn-sm btn-danger" data-table="" onclick="freeAsset({{$sim->id}}, 'sims', '{{$sim->asset_code}}')">Free</button>
                                         </td>
                                         <input name="has_sim" id="has_sim" value="Y" class="form-check-input" type="hidden" />
+										<input type="hidden" name="offboarding_asset_codes" data-asset-table="sims" data-asset-id="{{ $sim->id }}" data-asset-code="{{ $sim->asset_code }}" />
                                     </tr>
                                     <?php $sI++; ?>
                                     @endforeach
@@ -235,7 +238,7 @@
                                 @if( count($arf->desktops) > 0 )
                                     <?php $dI = 1; ?>
                                     @foreach( $arf->desktops as $desktop )
-                                    <tr id="tablet-row-{{$dI}}">
+                                    <tr id="desktop-row-{{$dI}}">
                                         <td>4.{{$dI}}</td>
                                         <td class="arf-heading-md">desktop</td>
                                         <td class="asset-code-input">
@@ -256,9 +259,10 @@
                                             <input required class="form-control arf-form-control arf-form-control-section-2 arf-toggle-input" type="text" name="arf_desktop_remarks" value="{{ $desktop->remarks }}" readonly />
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-sm btn-outline-success" data-table="" onclick="freeAsset({{$desktop->id}}, 'desktops', '{{$desktop->asset_code}}')">Free</button>
+                                            <button type="button" class="btn btn-sm btn-danger" data-table="" onclick="freeAsset({{$desktop->id}}, 'desktops', '{{$desktop->asset_code}}')">Free</button>
                                         </td>
                                         <input name="has_desktop" id="has_desktop" value="Y" class="form-check-input" type="hidden" />
+										<input type="hidden" name="offboarding_asset_codes" data-asset-table="desktops" data-asset-id="{{ $desktop->id }}" data-asset-code="{{ $desktop->asset_code }}" />
                                     </tr>
                                     <?php $dI++; ?>
                                     @endforeach
@@ -288,9 +292,10 @@
                                             <input required class="form-control arf-form-control arf-form-control-section-2 arf-toggle-input" type="text" name="arf_monitor_remarks" value="{{ $monitor->remarks }}" readonly />
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-sm btn-outline-success" data-table="" onclick="freeAsset({{$monitor->id}}, 'monitors', '{{$monitor->asset_code}}')">Free</button>
+                                            <button type="button" class="btn btn-sm btn-danger" data-table="" onclick="freeAsset({{$monitor->id}}, 'monitors', '{{$monitor->asset_code}}')">Free</button>
                                         </td>
                                         <input name="has_monitor" id="has_monitor" value="Y" class="form-check-input" type="hidden" />
+										<input type="hidden" name="offboarding_asset_codes" data-asset-table="monitors" data-asset-id="{{ $monitor->id }}" data-asset-code="{{ $monitor->asset_code }}" />
                                     </tr>
                                     <?php $mI++; ?>
                                     @endforeach
@@ -320,13 +325,48 @@
                                             <input required class="form-control arf-form-control arf-form-control-section-2 arf-toggle-input" type="text" name="arf_mobile_remarks" value="{{ $mobile->remarks }}" readonly />
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-sm btn-outline-success" data-table="" onclick="freeAsset({{$mobile->id}}, 'mobiles', '{{$mobile->asset_code}}')">Free</button>
+                                            <button type="button" class="btn btn-sm btn-danger" data-table="" onclick="freeAsset({{$mobile->id}}, 'mobiles', '{{$mobile->asset_code}}')">Free</button>
                                         </td>
                                         <input name="has_mobile" id="has_mobile" value="Y" class="form-check-input" type="hidden" />
+										<input type="hidden" name="offboarding_asset_codes" data-asset-table="mobiles" data-asset-id="{{ $mobile->id }}" data-asset-code="{{ $mobile->asset_code }}" />
                                     </tr>
                                     <?php $mI2++; ?>
                                     @endforeach
                                 @endif
+
+                                @if( count($arf->printers) > 0 )
+                                    <?php $pI5 = 1; ?>
+                                    @foreach( $arf->printers as $printer )
+                                    <tr id="printer-row-{{$pI5}}">
+                                        <td>6.{{$pI5}}</td>
+                                        <td class="arf-heading-md">printer</td>
+                                        <td class="asset-code-input">
+                                            <div class="d-flex align-items-center">
+                                                <input readonly required class="form-control arf-form-control arf-form-control-section-2 arf-toggle-input" type="text" name="arf_printer_asset_code" id="arf_printer_asset_code" value="{{ $printer->asset_code }}" />
+                                                <input type="hidden" name="arf_offboarding_printer_id" value="{{ $printer->id }}" />
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <select required name="arf_printer_brand" id="arf_printer_brand" class="brand-input form-select form-select-sm arf-form-control-section-2 arf-toggle-input">
+                                                <option value="{{ $printer->asset_brand }}">{{ $printer->asset_brand }}</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input required readonly class="form-control arf-form-control date-issued arf-form-control-section-2 arf-toggle-input" type="date" name="arf_printer_date_issued" value="{{ date('Y-m-d', strtotime($arf->created_at)) }}" />
+                                        </td>
+                                        <td>
+                                            <input required class="form-control arf-form-control arf-form-control-section-2 arf-toggle-input" type="text" name="arf_printer_remarks" value="{{ $printer->remarks }}" readonly />
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-sm btn-danger" data-table="" onclick="freeAsset({{$printer->id}}, 'printers', '{{$printer->asset_code}}')">Free</button>
+                                        </td>
+                                        <input name="has_printer" id="has_printer" value="Y" class="form-check-input" type="hidden" />
+										<input type="hidden" name="offboarding_asset_codes" data-asset-table="printers" data-asset-id="{{ $printer->id }}" data-asset-code="{{ $printer->asset_code }}" />
+                                    </tr>
+                                    <?php $pI5++; ?>
+                                    @endforeach
+                                @endif
+								
 
                             </tbody>
                         </table>
@@ -354,7 +394,7 @@
                     <a href="/" class="btn btn-outline-secondary">
                         Cancel
                     </a>
-                    <button type="button" class="btn bg-purple text-white" onclick="initiateOffboarding({{$arf->emp_id}})">
+                    <button type="button" class="btn bg-purple text-white" id="btnOffboarding" onclick="initiateOffboarding({{$arf->emp_id}})">
                         Initiate Offboarding
                     </button>
                 </div>
@@ -406,13 +446,74 @@
     }
 
     function initiateOffboarding(emp_id){
-        let response = confirm("Are you sure to offboard the employee: " + emp_id );
+        let assetCodes = document.getElementsByName("offboarding_asset_codes"),
+            assetsToOffboard = [],
+            assetCodesToShow = [],
+            btnOffboarding = $('#btnOffboarding'),
+            arfFormId = $('#arf_form_id').val();
+
+        if( ! assetCodes ){
+            alert("No Assets Found to Offboard");
+
+            return;
+        }
+
+        if( ! arfFormId ){
+            alert("Please select a valid Arf Form ID");
+
+            return;
+        }
+		
+		Array.from(assetCodes).forEach(assetCode => {
+			assetsToOffboard.push({
+				asset_id    : assetCode.getAttribute('data-asset-id'),
+				asset_code  : assetCode.getAttribute('data-asset-code'),
+                asset_table : assetCode.getAttribute('data-asset-table')
+			});
+
+            assetCodesToShow.push( assetCode.getAttribute('data-asset-code') );
+		});
+
+		let response = confirm(`Are you sure to offboard the below?  \n\nEmployee ID: ${emp_id} \nNumber of Assets: ${assetsToOffboard.length} \nAssets : ` + assetCodesToShow.join(','));
 
         if( ! response ){
             return;
         }
 
-        $('#offboarding_form').submit();
+        btnOffboarding.attr('disabled', true);
+        $('#site-loader').removeClass('d-none');
+
+        $.ajax({
+                method: "POST",
+                url: "/arf-offboarding-ajax/",
+                data: {
+                    arf_form_id: arfFormId,
+                    assets: assetsToOffboard,
+                    "_token": "{{ csrf_token() }}"
+                },
+                success: function (response) {
+                    $("#site-loader").addClass("d-none");
+
+                    if(response.success == true){
+                        alert("Offboarding Process has been initiated successfully.");
+
+                        window.location.href = '{{ env("APP_URL") }}';
+                    } else if(response.success == false){
+                        alert(response.message);
+                    }
+
+                    btnOffboarding.attr('disabled', false);
+                },
+                error: function (error) {
+                    console.log(error);
+
+                    $("#site-loader").addClass("d-none");
+        
+                    alert("Offboarding Process error.");
+
+                    btnOffboarding.attr('disabled', false);
+                },
+            });
     }
 </script>
 @endsection

@@ -36,7 +36,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/arf-form', [App\Http\Controllers\ArfFormController::class, 'create'])->name('arfform.submit');
     Route::post('/arf-form/update', [App\Http\Controllers\ArfFormController::class, 'update'])->name('arfform.update');
     Route::get('/arf-offboarding/{id}', [ArfFormController::class, 'destroy']);
-    Route::post('/arf-offboarding/{id}', [ArfFormController::class, 'startOffboarding'])->name('arfform.destroy');
     Route::get('/search-asset-availability', [SearchController::class, 'searchAsset']);
     Route::get('/get-brands', [SearchController::class, 'getBrands']);
     Route::get('/welcome', [WelcomeController::class, 'index']);
@@ -48,6 +47,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/refresh-assets', [ImportController::class, 'refreshAssets'])->name('import.refresh');
     Route::get('/get-ad-employee/{empId}', [SearchController::class, 'getADEmployee'])->name('search.aduser');
     Route::post('/free-asset', [ArfFormController::class, 'freeAsset']);
+    Route::post('/arf-offboarding-ajax', [ArfFormController::class, 'startOffboarding']);
 });
 
 Auth::routes([

@@ -82,27 +82,25 @@ class ArfFormController extends Controller
             ]);
             
         } catch (\Exception $exception) {
-            LogActivity::add('Exception', json_encode(Helper::getErrorDetails($exception)), 0, 'NULL_User');
-            
             return back()->withErrors([$exception->getMessage()]);
         }
     }
     
     public function edit(Request $request, int $id)
     {
-        if( ! auth()->user()->can('edit', $arfForm) ){
-            return redirect()
-                    ->back()
-                    ->withErrors(['You are not authorized to create ARF Form']);
-        }
-
-        $arf = ArfForm::where('emp_id', $id)->first();;
+        $arf = ArfForm::where('emp_id', $id)->first();
 
         if(!$arf){
             return view('arfmessage', [
                 'title'   => 'Not Found',
                 'message' => 'No Employee found with the ID: ' . $id
             ]);
+        }
+
+        if( ! auth()->user()->can('edit', $arf) ){
+            return redirect()
+                    ->back()
+                    ->withErrors(['You are not authorized to edit ARF Form']);
         }
 
         if($arf->status == 'In Active'){
@@ -156,8 +154,6 @@ class ArfFormController extends Controller
             return back()->with('success', 'ARF Updated Successfully');
             
         } catch (\Exception $exception) {
-            LogActivity::add('Exception_Asset_Update', json_encode(Helper::getErrorDetails($exception)), $arfFormUpdateRequest['arf_id'], 'NULL_User');
-            
             Log::info('### ARF Form - New Asset Registeration Request - Exception ###', [
                 'Exception'     => json_encode(Helper::getErrorDetails($exception)),
                 'By'            => auth()->user()->name  
@@ -184,36 +180,32 @@ class ArfFormController extends Controller
         ]);
     }
 
-    public function startOffboarding(Request $request, int $id)
+    public function startOffboarding(Request $request)
     {
-        Log::info('### ARF Form - Offboarding Started ###', [
-            'Request'     => $request->all(),
-            'Employee_Id' => $id,
-            'By' => auth()->user()->name
-        ]);
+        $arf_form_id = $request->arf_form_id;
+        $assets      = $request->assets;
 
         try {
+            Log::info('### ARF Form - Offboarding Started ###', [
+                'Request'       =>  $request->all(),
+                'By'            =>  auth()->user()->name,
+                'Arf_Form_ID'   =>  $arf_form_id
+            ]);
+
             DB::beginTransaction();
 
-            $arf = ArfForm::where('emp_id', $id)
-                ->where('id', $request->arf_id)
+            $arf = ArfForm::where('id', $arf_form_id)
                 ->where('status', '!=', 'In Active')
                 ->first();
 
-            if(!$arf){
-                return view('arfmessage', [
-                    'title' => 'ARF is already In Active',
+            if( ! $arf ){
+                return response()->json([
+                    'success' => false,
                     'message' => 'Please check this user has already been off-boarded'
                 ]);
             }
             
-            $body = [
-                'name'      =>      $arf->name,
-                'email'     =>      $arf->email,
-                'items'     =>      ArfFormService::getItems($request->all())
-            ];
-
-            ArfFormService::unRegisterAssets($request->all(), $arf);
+            ArfFormService::unRegisterAssets($assets, $arf);
 
             $arf->status = 'In Active';
 
@@ -221,30 +213,25 @@ class ArfFormController extends Controller
             
             DB::commit();
 
-            Log::info('### ARF Form - Offboarding Success ###', [
-                'Employee_Id' => $id
-            ]);
+            //dispatch(new ArfOffboardingJob($body));
 
-            dispatch(new ArfOffboardingJob($body));
-
-            return view('arfmessage', [
-                'title'   => 'Offboarding Successful',
-                'message' => 'The User with Employee Id: ' . $id . ' has been offboarded successfully',
-                'color'   => 'green'
+            return response()->json([
+                'success' => true,
+                'message' => 'Offboarding Successful'
             ]);
             
         } catch (\Exception $exception) {
-            LogActivity::add('Exception_Asset_Update', json_encode(Helper::getErrorDetails($exception)), $id, 'NULL_User');
-            
             DB::rollBack();
 
             Log::info('### ARF Form - Offboarding Exception ###', [
                 'Request'     => $request->all(),
-                'Employee_Id' => $id,
                 'Exception'   => Helper::getErrorDetails($exception)
             ]);
 
-            return back()->withErrors([$exception->getMessage()]);
+            return response()->json([
+                'success' => false,
+                'message' => 'Offboarding unsuccessful'
+            ]);
         }
     }
 
